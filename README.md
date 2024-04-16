@@ -12,4 +12,5 @@ List of available endpoints:
 - `POST /login`
 - `POST /workout`
 - `GET /analytics`
+
   &nbsp;
