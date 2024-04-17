@@ -69,7 +69,22 @@ const addLike = async (req, res) => {
 }
 
 const addComment = async (req, res) => {
+  try {
+    const userId = req.user._id
+    const postId = req.body.postId
+    const comment = req.body.comment
 
+    const data = await Post.addComment({ userId, postId, comment })
+    if (data) {
+      return res.status(201).json({ status: data.acknowledged })
+    } else {
+      return res.status(400).json({ error: data.error })
+    }
+
+  } catch (error) {
+    console.error("Error fetching data:", error)
+    return res.status(500).json({ error: "Internal server error" })
+  }
 }
 
 module.exports = {

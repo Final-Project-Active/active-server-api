@@ -34,7 +34,14 @@ class Post {
     const postCollection = this.collection();
     const result = await postCollection.updateOne(
       { _id: new ObjectId(data.postId) },
-      { $push: { comments: data } }
+      {
+        $push: {
+          comments: {
+            comment: data.comment,
+            userId: data.userId
+          }
+        }
+      }
     );
     return result;
   }
