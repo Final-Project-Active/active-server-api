@@ -3,6 +3,7 @@ const User = require("./userController")
 const Analytics = require("./analyticsController")
 const Workout = require("./workoutController")
 const UserWorkout = require("./userworkoutController")
+const Post = require("./postController")
 
 const home = (req, res) => {
   res.status(200).json({ message: 'Welcome to Active Server API' })
@@ -19,5 +20,11 @@ module.exports = {
   getWorkouts: Workout.getWorkouts,
   getWorkoutById: Workout.getWorkoutById,
   addUserWorkout: UserWorkout.addUserWorkout,
-  updateUserWorkout: UserWorkout.updateUserWorkout
+  updateUserWorkout: UserWorkout.updateUserWorkout,
+  getPost: Post.getPost,
+  addPost: Post.addPost,
+  addLike: Post.addLike,
+  addComment: Post.addComment,
+  getPostById: Post.getPostById,
+  deleteById: Post.deleteById
 }
