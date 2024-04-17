@@ -20,6 +20,9 @@ async function authentication(req, res, next) {
         next()
     } catch (error) {
         console.log(error)
+        if(error.name === "Unauthenticated") {
+            return res.status(403).json({message: "You are not authorized"})
+        }
         next(error)
     }
 }
