@@ -9,7 +9,7 @@ class User {
     return db.collection('users');
   }
 
-  static async findAll(query={}) {
+  static async findAll(query = {}) {
     const userCollection = this.collection();
     const data = await userCollection.find(query).toArray();
     return data;
@@ -26,49 +26,49 @@ class User {
   static async register(newUser) {
     const userCollection = this.collection()
     const errors = []
-    
+
     const isValidEmail = validator.isEmail(newUser.email)
-    if(!isValidEmail) {
+    if (!isValidEmail) {
       errors.push("Invalid email format")
     } else {
-      const isUniqueEmail = await userCollection.findOne({email: newUser.email})
-      if(isUniqueEmail) {
+      const isUniqueEmail = await userCollection.findOne({ email: newUser.email })
+      if (isUniqueEmail) {
         errors.push("Email is already registered")
+      }
     }
-    }
-    if(!newUser.username) {
+    if (!newUser.username) {
       errors.push("Username is required")
     } else {
-      const isUniqueUsername = await userCollection.findOne({username: newUser.username})
-      if(isUniqueUsername) {
+      const isUniqueUsername = await userCollection.findOne({ username: newUser.username })
+      if (isUniqueUsername) {
         errors.push("Username is already registered")
       }
     }
-    const isValidPassword = validator.isLength(newUser.password, {min: 5})
-    if(!isValidPassword) {
+    const isValidPassword = validator.isLength(newUser.password, { min: 5 })
+    if (!isValidPassword) {
       errors.push("Password is too short")
     }
-    if(!newUser.age) {
+    if (!newUser.age) {
       errors.push("Age is required")
     }
-    if(!newUser.weight) {
+    if (!newUser.weight) {
       errors.push("Weight is required")
     }
-    if(!newUser.height) {
+    if (!newUser.height) {
       errors.push("Height is required")
     }
-    if(!newUser.gender) {
+    if (!newUser.gender) {
       errors.push("Gender is required")
     }
-    if(!newUser.goal) {
+    if (!newUser.goal) {
       errors.push("Goal is required")
     }
-    if(!newUser.physicalActivity) {
+    if (!newUser.physicalActivity) {
       errors.push("Physical Activity is required")
     }
 
-    if(errors.length > 0) {
-      return {errors}
+    if (errors.length > 0) {
+      return { errors }
     }
 
     const result = await userCollection.insertOne({
@@ -85,22 +85,22 @@ class User {
 
   static async login(credentials) {
     const userCollection = this.collection()
-    const {email, password} = credentials;
+    const { email, password } = credentials;
 
-    const user = await userCollection.findOne({email});
+    const user = await userCollection.findOne({ email });
 
-    if(!user) {
-      return {error: "User not found"}
+    if (!user) {
+      return { error: "User not found" }
     }
 
     const passwordMatch = compare(password, user.password)
-    if(!passwordMatch) {
-      return {error: "Invalid password!"}
+    if (!passwordMatch) {
+      return { error: "Invalid password!" }
     }
 
     const userIdString = user._id.toString()
-    const accessToken = sign({_id: userIdString})
-    return {accessToken}
+    const accessToken = sign({ _id: userIdString })
+    return { accessToken }
   }
 }
 
