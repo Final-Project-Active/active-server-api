@@ -16,6 +16,23 @@ const getPost = async (req, res) => {
   }
 }
 
+const getPostById = async (req, res) => {
+  try {
+    const postId = req.params.postId
+
+    const data = await Post.findById(postId)
+    if (data) {
+      return res.status(200).json(data)
+    } else {
+      return res.status(404).json({ error: "Data not found" })
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error)
+    return res.status(500).json({ error: "Internal server error" })
+  }
+
+}
+
 const addPost = async (req, res) => {
   try {
     const userId = req.user._id
@@ -34,16 +51,6 @@ const addPost = async (req, res) => {
     console.error("Error fetching data:", error)
     return res.status(500).json({ error: "Internal server error" })
   }
-}
-
-const getPostById = async (req, res) => {
-  try {
-
-  } catch (error) {
-    console.error("Error fetching data:", error)
-    return res.status(500).json({ error: "Internal server error" })
-  }
-
 }
 
 const addLike = async (req, res) => {
