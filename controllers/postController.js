@@ -94,10 +94,26 @@ const addComment = async (req, res) => {
   }
 }
 
+const deleteById = async (req, res) => {
+  try {
+    const postId = req.params.postId
+    const data = await Post.deleteById(postId)
+    if (data) {
+      return res.status(200).json({ status: data.acknowledged })
+    } else {
+      return res.status(400).json({ error: data.error })
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error)
+    return res.status(500).json({ error: "Internal server error" })
+  }
+}
+
 module.exports = {
   getPost,
   getPostById,
   addPost,
   addLike,
-  addComment
+  addComment,
+  deleteById
 }

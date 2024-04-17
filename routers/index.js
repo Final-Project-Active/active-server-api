@@ -18,8 +18,9 @@ router.put("/userworkout/:workoutId", authentication, Controller.updateUserWorko
 
 router.get("/post", authentication, Controller.getPost);
 router.post("/post", authentication, Controller.addPost);
-router.post("/like", authentication, Controller.addLike);
-router.post("/comment", authentication, Controller.addComment);
+router.patch("/like", authentication, Controller.addLike);
+router.put("/comment", authentication, Controller.addComment);
 router.get("/post/:postId", authentication, Controller.getPostById);
+router.delete("/post/:postId", authentication, Controller.deleteById);
 
 module.exports = router;

@@ -69,6 +69,14 @@ class Post {
     }
     return false
   }
+
+  static async deleteById(_id) {
+    const postCollection = this.collection();
+    const result = await postCollection.deleteOne({
+      _id: new ObjectId(_id)
+    });
+    return result;
+  }
 }
 
 module.exports = Post
