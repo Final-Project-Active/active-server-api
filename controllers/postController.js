@@ -97,6 +97,13 @@ const addComment = async (req, res) => {
 const deleteById = async (req, res) => {
   try {
     const postId = req.params.postId
+    const userId = req.user._id
+
+    const post = await Post.findById(postId)
+    if (post.userId.toString() !== userId.toString()) {
+      return res.status(401).json({ error: "Unauthorized" })
+    }
+
     const data = await Post.deleteById(postId)
     if (data) {
       return res.status(200).json({ status: data.acknowledged })
