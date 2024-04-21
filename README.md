@@ -11,10 +11,173 @@ List of available endpoints:
 - `POST /register`
 - `POST /login`
 - `POST /workout`
+- `POST /analytics`
 - `GET /analytics`
 
   &nbsp;
 
+### 1. POST /register
+
+Description:
+
+- Post register, this endpoint can be use to create new user
+
+Request:
+
+- body:
+
+```json
+{
+  "name": "string",
+  "username": "string",
+  "email": "string",
+  "password": "string",
+  "imageUrl": "string",
+  "age": "string",
+  "weight": "string",
+  "gender": "string",
+  "height": "string",
+  "goal": "string",
+  "physicalActivity": "string"
+}
+```
+
+_Response (201 - OK)_
+
+```json
+{
+  "name": "string",
+  "username": "string",
+  "email": "string",
+  "password": "string",
+  "imageUrl": "string",
+  "age": "string",
+  "weight": "string",
+  "gender": "string",
+  "height": "string",
+  "goal": "string",
+  "physicalActivity": "string"
+}
+```
+
+&nbsp;
+
+### 2. POST /login
+
+Description:
+
+- Post login, this endpoint can be use get access_token
+
+Request:
+
+- body:
+
+```json
+{
+  "email": "string",
+  "password": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "accessToken": "string"
+}
+```
+
+&nbsp;
+
+### 3. POST /workout
+
+Description:
+
+- Post workout, this endpoint can be use get access_token
+
+Request:
+
+- headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+
+_Response (201 - OK)_
+
+```json
+{
+  "message": "string"
+}
+```
+
+&nbsp;
+
+### 4. POST /analitycs
+
+Description:
+
+- Post analitics, this endpoint can be use to create user health analytics
+
+Request:
+
+- headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+
+- body:
+
+```json
+{
+  "currentWeight": "number",
+  "duration": "number",
+  "intensity": "string"
+}
+```
+
+_Response (201 - OK)_
+
+```json
+{
+  "userId": "string"
+}
+```
+
+&nbsp;
+
+### 5. GET /analitycs
+
+Description:
+
+- Post analitics, this endpoint can be use to create user health analytics
+
+Request:
+
+- headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "weight": "number",
+  "duration": "number",
+  "intensity": "string"
+}
+```
+
+&nbsp;
 
 ### 6. GET /articles
 
@@ -117,8 +280,6 @@ _Response (201 - Created)_
 ```
 
 _Response (400 - Bad Request)_
-
-
 
 ### 9. PUT /Comment/:idPost
 
@@ -237,7 +398,6 @@ _Response (203 - Forbidden)_
 
 &nbsp;
 
-
 ### Global Error
 
 _Response (401 - Unauthorized)_
@@ -263,6 +423,3 @@ _Response (500 - Internal Server Error)_
   "message": "Internal server error"
 }
 ```
-
-
-
