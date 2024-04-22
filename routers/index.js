@@ -8,7 +8,6 @@ router.get('/', Controller.home);
 router.get('/articles', Controller.getArticles);
 router.post("/register", Controller.registerUser);
 router.post("/login", Controller.loginUser);
-router.get("/user", authentication, Controller.findById);
 router.post("/analytics", authentication, Controller.createAnalytics);
 router.get("/analytics", authentication, Controller.getAnalytics);
 router.get("/workout", authentication, Controller.getWorkouts);
