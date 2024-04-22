@@ -4,10 +4,10 @@ const registerUser = async (req, res) => {
     try {
         const { name, username, email, password, imageUrl, age, weight, gender, height, goal, physicalActivity } = req.body
         const user = await User.register({ name, username, email, password, imageUrl, age, weight, gender, height, goal, physicalActivity })
-        if (user) {
+        if (user && !user.errors) {
             return res.status(201).json(user)
         } else {
-            return res.status(400).json({ error: user.error })
+            return res.status(400).json({ error: user.errors })
         }
     } catch (error) {
         console.log("Error registering user:", error)
