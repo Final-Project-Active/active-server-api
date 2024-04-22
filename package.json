@@ -20,7 +20,7 @@
   "main": "app.js",
   "scripts": {
     "start": "clear && nodemon bin/www",
-    "test": "clear && jest --detectOpenHandles -runInBand"
+    "test": "clear && jest --detectOpenHandles -runInBand --coverage"
   },
   "author": "RMT-46",
   "license": "ISC"
