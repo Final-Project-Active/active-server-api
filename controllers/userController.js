@@ -47,6 +47,5 @@ const findById = async (req, res) => {
 
 module.exports = {
     registerUser,
-    loginUser,
-    findById
+    loginUser
 }

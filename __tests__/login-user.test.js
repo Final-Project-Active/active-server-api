@@ -1,9 +1,9 @@
 const app = require("../app");
 const request = require("supertest");
 
-const dataUser = {
-  email: "ninjacode@mail.com",
-  password: "password",
+let dataUser = {
+  email: "user1@mail.com",
+  password: "user123",
 };
 
 describe("POST /login", () => {
