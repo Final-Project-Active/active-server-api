@@ -1,5 +1,6 @@
 const { ObjectId } = require('mongodb');
 const db = require('../config/db');
+const validator = require("validator");
 
 class Post {
   static collection() {
@@ -32,6 +33,20 @@ class Post {
 
   static async addComment(data) {
     const postCollection = this.collection();
+    const errors = []
+    
+    if(data.comment === undefined){
+      errors.push("comment required")
+    }
+
+    if(typeof data.comment === 'string' && data.comment.length === 0){
+      errors.push("comment can't be empty")
+    }
+    
+    if(errors.length > 0){
+      return {error: errors}
+    }
+
     const result = await postCollection.updateOne(
       { _id: new ObjectId(data.postId) },
       {

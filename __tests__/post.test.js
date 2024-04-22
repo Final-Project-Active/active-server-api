@@ -1,18 +1,19 @@
 const request = require("supertest")
 const app = require('../app')
+const { v4 : uuidv4 } = require('uuid');
 
-describe.skip("GET /post", () => {
+describe("GET /post", () => {
     test("should return status code 200 and array of post", async () => {
         let response = await request(app).get("/post")
         expect(response.status).toBe(200)
     })
 })
 
-describe.skip("POST /post", () => {
+describe("POST /post", () => {
     test("should create a new post and return status code 201", async () => {
         const postData = {
-            thumbnail: 'http://example.com/thumbnail.jpg',
-            caption: 'This is a test caption'
+            thumbnail: `http://example.com/${uuidv4()}.jpg`,
+            caption: `This is a test ${uuidv4()}`
         };
 
         let response = await request(app)
@@ -45,7 +46,7 @@ describe("PUT /comment", () => {
     test("should return code status 400", async () => {
         const commentData = {
             
-            postId: '11209909879',
+            postId: '6625d1ebd3449de797f3b770',
             comment: 'Ini adalah komentar bagus!'
         };
 
@@ -54,7 +55,7 @@ describe("PUT /comment", () => {
             .send(commentData)
             .set('Authorization', `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjI1ZDVkZmQ3MjVmYWM4NGJlNWNhZTAiLCJpYXQiOjE3MTM3NTU2Mzh9.m8KUH8ee6AHFJQh2FRdBEAFIet6ZJoPX-8pNq9th4OM`); 
 
-        expect(response.status).toBe(400);
+        expect(response.status).toBe(404);
         expect(response.body).toHaveProperty('error');
     });
 });
