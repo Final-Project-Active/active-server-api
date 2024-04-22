@@ -1,5 +1,8 @@
-if (process.env.NODE_ENV !== 'production')
+if (process.env.NODE_ENV === 'test') {
+  require('dotenv').config({ path: '.env.test' });
+} else if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
+}
 
 const express = require('express');
 const router = require('./routers');

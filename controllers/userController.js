@@ -33,7 +33,8 @@ const loginUser = async (req, res) => {
 
 const findById = async (req, res) => {
     try {
-        const user = await User.findById(req.user._id)
+        const id = req.params.userId ? req.params.userId : req.user._id
+        const user = await User.findById(id)
         if (!user) {
             return res.status(404).json({ error: "User not found" })
         }
