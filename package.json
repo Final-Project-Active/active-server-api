@@ -22,8 +22,6 @@
   "scripts": {
     "start": "clear && nodemon bin/www",
     "test": "clear && jest --detectOpenHandles -runInBand --coverage"
-    "start-test": "clear && cross-env NODE_ENV=test nodemon bin/www",
-    "test": "clear && cross-env NODE_ENV=test jest --detectOpenHandles"
   },
   "author": "RMT-46",
   "license": "ISC"
