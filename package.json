@@ -23,7 +23,7 @@
   "scripts": {
     "start": "clear && nodemon bin/www",
     "start-test": "clear && cross-env NODE_ENV=test nodemon bin/www",
-    "test": "clear && cross-env NODE_ENV=test jest --detectOpenHandles"
+    "test": "clear && cross-env NODE_ENV=test jest --runInBand --detectOpenHandles --forceExit --coverage"
   },
   "author": "RMT-46",
   "license": "ISC"
