@@ -12,6 +12,7 @@ class Post {
       .find({})
       .limit(limit)
       .skip((page - 1) * limit)
+      .sort({ createdAt: -1 })
       .toArray();
     return data;
   }
