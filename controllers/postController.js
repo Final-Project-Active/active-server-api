@@ -75,6 +75,28 @@ const addLike = async (req, res) => {
   }
 }
 
+const removeLike = async (req, res) => {
+  try {
+    const userId = req.user._id
+    const postId = req.body.postId
+
+    const isLiked = await Post.isLiked({ userId, postId })
+    if (!isLiked) {
+      return res.status(404).json({ error: "Data not found" })
+    }
+
+    const data = await Post.removeLike({ userId, postId })
+    if (data) {
+      return res.status(201).json({ status: data.acknowledged })
+    } else {
+      return res.status(400).json({ error: data.error })
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error)
+    return res.status(500).json({ error: "Internal server error" })
+  }
+}
+
 const addComment = async (req, res) => {
   try {
     const userId = req.user._id
@@ -121,6 +143,7 @@ module.exports = {
   getPostById,
   addPost,
   addLike,
+  removeLike,
   addComment,
   deleteById
 }
