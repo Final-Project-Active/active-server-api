@@ -60,12 +60,12 @@ const addLike = async (req, res) => {
 
     const isLiked = await Post.isLiked({ userId, postId })
     if (isLiked) {
-      return res.status(201).json({ status: true })
+      return res.status(200).json({ status: true })
     }
 
     const data = await Post.addLike({ userId, postId })
     if (data) {
-      return res.status(201).json({ status: data.acknowledged })
+      return res.status(200).json({ status: data.acknowledged })
     } else {
       return res.status(400).json({ error: data.error })
     }
@@ -80,14 +80,9 @@ const removeLike = async (req, res) => {
     const userId = req.user._id
     const postId = req.body.postId
 
-    const isLiked = await Post.isLiked({ userId, postId })
-    if (!isLiked) {
-      return res.status(404).json({ error: "Data not found" })
-    }
-
     const data = await Post.removeLike({ userId, postId })
     if (data) {
-      return res.status(201).json({ status: data.acknowledged })
+      return res.status(200).json({ status: data.acknowledged })
     } else {
       return res.status(400).json({ error: data.error })
     }
