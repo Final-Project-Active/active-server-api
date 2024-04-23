@@ -71,6 +71,15 @@ class Post {
     return false
   }
 
+  static async removeLike(data) {
+    const postCollection = this.collection();
+    const result = await postCollection.updateOne(
+      { _id: new ObjectId(data.postId) },
+      { $pull: { likes: data.userId } }
+    );
+    return result;
+  }
+
   static async deleteById(_id) {
     const postCollection = this.collection();
     const result = await postCollection.deleteOne({

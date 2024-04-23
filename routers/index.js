@@ -21,6 +21,7 @@ router.get("/userworkout", authentication, Controller.getUserWorkout);
 router.get("/post", authentication, Controller.getPost);
 router.post("/post", authentication, Controller.addPost);
 router.patch("/like", authentication, Controller.addLike);
+router.patch("/unlike", authentication, Controller.removeLike);
 router.put("/comment", authentication, Controller.addComment);
 router.get("/post/:postId", authentication, Controller.getPostById);
 router.delete("/post/:postId", authentication, Controller.deleteById);

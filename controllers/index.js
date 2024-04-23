@@ -25,6 +25,7 @@ module.exports = {
   getPost: Post.getPost,
   addPost: Post.addPost,
   addLike: Post.addLike,
+  removeLike: Post.removeLike,
   addComment: Post.addComment,
   getPostById: Post.getPostById,
   deleteById: Post.deleteById
