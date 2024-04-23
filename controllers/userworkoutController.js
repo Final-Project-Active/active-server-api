@@ -37,7 +37,23 @@ const updateUserWorkout = async (req, res) => {
     }
 }
 
+const getUserWorkout = async (req, res) => {
+    try {
+        const userId = req.user._id
+
+        const result = await UserWorkouts.getUserWorkout(userId)
+
+        if (result.length === 0)
+            return res.status(404).json({ error: "Data not found" })
+
+        return res.status(200).json(result)
+    } catch (error) {
+        return res.status(500).json({ error: "Internal server error" })
+    }
+}
+
 module.exports = {
     addUserWorkout,
-    updateUserWorkout
+    updateUserWorkout,
+    getUserWorkout
 }

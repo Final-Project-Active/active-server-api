@@ -16,6 +16,7 @@ router.get("/workout", authentication, Controller.getWorkouts);
 router.get("/workout/:workoutId", authentication, Controller.getWorkoutById);
 router.post("/userworkout/:workoutId", authentication, Controller.addUserWorkout);
 router.put("/userworkout/:workoutId", authentication, Controller.updateUserWorkout);
+router.get("/userworkout", authentication, Controller.getUserWorkout);
 
 router.get("/post", authentication, Controller.getPost);
 router.post("/post", authentication, Controller.addPost);

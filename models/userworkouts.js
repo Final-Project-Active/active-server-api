@@ -35,6 +35,12 @@ class UserWorkouts {
             return null
         }
     }
+
+    static async getUserWorkout(userId) {
+        const userWorkoutCollection = this.collection()
+        const result = await userWorkoutCollection.find({ userId: new ObjectId(userId) }).toArray()
+        return result
+    }
 }
 
 module.exports = UserWorkouts;
