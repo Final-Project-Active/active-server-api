@@ -21,9 +21,11 @@ module.exports = {
   getWorkoutById: Workout.getWorkoutById,
   addUserWorkout: UserWorkout.addUserWorkout,
   updateUserWorkout: UserWorkout.updateUserWorkout,
+  getUserWorkout: UserWorkout.getUserWorkout,
   getPost: Post.getPost,
   addPost: Post.addPost,
   addLike: Post.addLike,
+  removeLike: Post.removeLike,
   addComment: Post.addComment,
   getPostById: Post.getPostById,
   deleteById: Post.deleteById

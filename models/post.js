@@ -13,6 +13,7 @@ class Post {
       .find({})
       .limit(limit)
       .skip((page - 1) * limit)
+      .sort({ createdAt: -1 })
       .toArray();
     return data;
   }
@@ -83,6 +84,15 @@ class Post {
       return likes.includes(data.userId.toString())
     }
     return false
+  }
+
+  static async removeLike(data) {
+    const postCollection = this.collection();
+    const result = await postCollection.updateOne(
+      { _id: new ObjectId(data.postId) },
+      { $pull: { likes: data.userId } }
+    );
+    return result;
   }
 
   static async deleteById(_id) {
