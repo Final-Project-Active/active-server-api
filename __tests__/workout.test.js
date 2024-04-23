@@ -28,8 +28,8 @@ beforeAll(async () => {
   await Workout.collection().insertOne(workoutData);
 
   let dataUser = {
-    email: "user1@mail.com",
-    password: "user123",
+    email: "user99@mail.com",
+    password: "user99",
   };
 
   const loginUser = await database

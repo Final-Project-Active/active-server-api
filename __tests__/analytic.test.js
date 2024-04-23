@@ -19,8 +19,8 @@ beforeAll(async () => {
   await Analytic.collection().insertOne(analyticData);
 
   let dataUser = {
-    email: "user1@mail.com",
-    password: "user123",
+    email: "user99@mail.com",
+    password: "user99",
   };
 
   const loginUser = await database
