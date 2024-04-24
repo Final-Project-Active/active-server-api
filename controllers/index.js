@@ -15,6 +15,7 @@ module.exports = {
   getWorkouts: Workout.getWorkouts,
   getWorkoutById: Workout.getWorkoutById,
   addUserWorkout: UserWorkout.addUserWorkout,
+  updateUserWorkout: UserWorkout.updateUserWorkout,
   getUserWorkout: UserWorkout.getUserWorkout,
   getPost: Post.getPost,
   addPost: Post.addPost,

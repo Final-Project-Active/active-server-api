@@ -22,7 +22,26 @@ const getUserWorkout = async (req, res) => {
     return res.status(200).json(result)
 }
 
+const updateUserWorkout = async (req, res) => {
+    try {
+        const userId = req.user._id
+        const { workoutId } = req.params
+
+        const result = await UserWorkouts.updateUserWorkout(userId, workoutId)
+
+        if (result) {
+            return res.status(200).json({ message: "Workout has been marked as completed" })
+        } else {
+            return res.status(400).json({ error: "The workout is already marked as completed" })
+        }
+    } catch (error) {
+        console.error("Error adding to the userworkouts collection:", error)
+        return res.status(500).json({ error: "Internal server error" })
+    }
+}
+
 module.exports = {
     addUserWorkout,
-    getUserWorkout
+    getUserWorkout,
+    updateUserWorkout
 }

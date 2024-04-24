@@ -28,6 +28,19 @@ class UserWorkouts {
         const result = await userWorkoutCollection.find({ userId: new ObjectId(userId) }).toArray()
         return result
     }
+
+    static async updateUserWorkout(userId, workoutId) {
+        const userWorkoutCollection = this.collection()
+
+        const result = await userWorkoutCollection.updateOne({ userId: new ObjectId(userId), workoutId: new ObjectId(workoutId) }, { $set: { completed: true } })
+
+        if (result.modifiedCount > 0) {
+            const updatedUserWorkout = await userWorkoutCollection.findOne({ userId: new ObjectId(userId), workoutId: new ObjectId(workoutId) })
+            return updatedUserWorkout
+        } else {
+            return null
+        }
+    }
 }
 
 module.exports = UserWorkouts;
