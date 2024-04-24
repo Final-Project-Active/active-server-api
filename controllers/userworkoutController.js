@@ -30,7 +30,7 @@ const updateUserWorkout = async (req, res) => {
         const result = await UserWorkouts.updateUserWorkout(userId, workoutId)
 
         if (result) {
-            return res.status(200).json({ message: "Workout has been marked as completed" })
+            return res.status(200).json(result)
         } else {
             return res.status(400).json({ error: "The workout is already marked as completed" })
         }
