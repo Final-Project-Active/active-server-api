@@ -24,7 +24,7 @@ beforeAll(async () => {
       },
     ],
   };
-  
+
   await Workout.collection().insertOne(workoutData);
 
   let dataUser = {
