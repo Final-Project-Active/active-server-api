@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const { findById } = require('../models/user');
 
 const getPost = async (req, res) => {
   try {
@@ -11,7 +12,7 @@ const getPost = async (req, res) => {
       return res.status(404).json({ error: "Data not found" })
     }
   } catch (error) {
-    console.error("Error fetching data:", error)
+    // console.error("Error fetching data:", error)
     return res.status(500).json({ error: "Internal server error" })
   }
 }
@@ -21,13 +22,13 @@ const getPostById = async (req, res) => {
     const postId = req.params.postId
 
     const data = await Post.findById(postId)
-    if (data) {
-      return res.status(200).json(data)
-    } else {
+    if (!data) {
       return res.status(404).json({ error: "Data not found" })
+    } else {
+      return res.status(200).json(data)
     }
   } catch (error) {
-    console.error("Error fetching data:", error)
+    // console.error("Error fetching data:", error)
     return res.status(500).json({ error: "Internal server error" })
   }
 
@@ -48,7 +49,7 @@ const addPost = async (req, res) => {
       return res.status(400).json({ error: data.error })
     }
   } catch (error) {
-    console.error("Error fetching data:", error)
+    // console.error("Error fetching data:", error)
     return res.status(500).json({ error: "Internal server error" })
   }
 }
@@ -70,7 +71,7 @@ const addLike = async (req, res) => {
       return res.status(400).json({ error: data.error })
     }
   } catch (error) {
-    console.error("Error fetching data:", error)
+    // console.error("Error fetching data:", error)
     return res.status(500).json({ error: "Internal server error" })
   }
 }
@@ -98,15 +99,21 @@ const addComment = async (req, res) => {
     const postId = req.body.postId
     const comment = req.body.comment
 
+    const post = await Post.findById(postId)
+    if(!post){
+      return res.status(404).json({error: ['post not found']})
+    }
+    
     const data = await Post.addComment({ userId, postId, comment })
-    if (data) {
-      return res.status(201).json({ status: data.acknowledged })
+    // console.log(data);
+    if (data.error) {
+      return res.status(400).json({ error: data.error }) 
     } else {
-      return res.status(400).json({ error: data.error })
+      return res.status(201).json({ status: data.acknowledged })
     }
 
   } catch (error) {
-    console.error("Error fetching data:", error)
+    // console.error("Error fetching data:", error)
     return res.status(500).json({ error: "Internal server error" })
   }
 }
@@ -128,7 +135,7 @@ const deleteById = async (req, res) => {
       return res.status(400).json({ error: data.error })
     }
   } catch (error) {
-    console.error("Error fetching data:", error)
+    // console.error("Error fetching data:", error)
     return res.status(500).json({ error: "Internal server error" })
   }
 }
