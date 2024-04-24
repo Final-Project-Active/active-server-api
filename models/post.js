@@ -1,6 +1,5 @@
 const { ObjectId } = require('mongodb');
 const db = require('../config/db');
-const validator = require("validator");
 
 class Post {
   static collection() {
