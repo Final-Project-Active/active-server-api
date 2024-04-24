@@ -88,7 +88,7 @@ describe("GET /userworkouts", () => {
     test("should return 403 when Authorization not found", async () => {
       response = await request(app)
         .get("/userworkout")
-      // .set("Authorization", "Bearer " + access_token_user);
+        
       expect(response.status).toBe(403);
     });
     test("should return 403 when Authorization not found", async () => {
