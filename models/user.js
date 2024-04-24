@@ -9,12 +9,6 @@ class User {
     return db.collection('users');
   }
 
-  static async findAll(query = {}) {
-    const userCollection = this.collection();
-    const data = await userCollection.find(query).toArray();
-    return data;
-  }
-
   static async findById(_id) {
     const userCollection = this.collection()
     const data = await userCollection.findOne({

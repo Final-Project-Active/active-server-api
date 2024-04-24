@@ -223,6 +223,125 @@ describe("POST /register", () => {
 
       expect(response.status).toBe(400);
     });
+
+    test("returning required username is missing", async () => {
+      const response = await request(app).post("/register").send({
+        name: "lunar agustine",
+        email: "lunar11@mail.com",
+        password: "lunar123",
+        imageUrl: "test.png",
+        age: "25",
+        weight: "65 kg",
+        gender: "Female",
+        height: "166 cm",
+        goal: "Get Fitter",
+        physicalActivity: "beginner",
+      });
+
+      expect(response.status).toBe(400);
+    });
+
+    test("returning required Age is missing", async () => {
+      const response = await request(app).post("/register").send({
+        name: "lunar agustine",
+        username: "lunarAg",
+        email: "lunar11@mail.com",
+        password: "lunar123",
+        imageUrl: "test.png",
+        weight: "65 kg",
+        gender: "Female",
+        height: "166 cm",
+        goal: "Get Fitter",
+        physicalActivity: "beginner",
+      });
+
+      expect(response.status).toBe(400);
+    });
+
+    test("returning required weight is missing", async () => {
+      const response = await request(app).post("/register").send({
+        name: "lunar agustine",
+        username: "lunarAg",
+        email: "lunar11@mail.com",
+        password: "lunar123",
+        imageUrl: "test.png",
+        age: "25",
+        gender: "Female",
+        height: "166 cm",
+        goal: "Get Fitter",
+        physicalActivity: "beginner",
+      });
+
+      expect(response.status).toBe(400);
+    });
+
+    test("returning required height is missing", async () => {
+      const response = await request(app).post("/register").send({
+        name: "lunar agustine",
+        username: "lunarAg",
+        email: "lunar11@mail.com",
+        password: "lunar123",
+        imageUrl: "test.png",
+        age: "25",
+        weight: "65 kg",
+        gender: "Female",
+        goal: "Get Fitter",
+        physicalActivity: "beginner",
+      });
+
+      expect(response.status).toBe(400);
+    });
+
+    test("returning required gender is missing", async () => {
+      const response = await request(app).post("/register").send({
+        name: "lunar agustine",
+        username: "lunarAg",
+        email: "lunar11@mail.com",
+        password: "lunar123",
+        imageUrl: "test.png",
+        age: "25",
+        weight: "65 kg",
+        height: "166 cm",
+        goal: "Get Fitter",
+        physicalActivity: "beginner",
+      });
+
+      expect(response.status).toBe(400);
+    });
+
+    test("returning required goal  is missing", async () => {
+      const response = await request(app).post("/register").send({
+        name: "lunar agustine",
+        username: "lunarAg",
+        email: "lunar11@mail.com",
+        password: "lunar123",
+        imageUrl: "test.png",
+        age: "25",
+        weight: "65 kg",
+        gender: "Female",
+        height: "166 cm",
+        physicalActivity: "beginner",
+      });
+
+      expect(response.status).toBe(400);
+    });
+
+    test("returning required physicalactivity is missing", async () => {
+      const response = await request(app).post("/register").send({
+        name: "lunar agustine",
+        username: "lunarAg",
+        email: "lunar11@mail.com",
+        password: "lunar123",
+        imageUrl: "test.png",
+        age: "25",
+        weight: "65 kg",
+        gender: "Female",
+        height: "166 cm",
+        goal: "Get Fitter",
+      });
+
+      expect(response.status).toBe(400);
+    });
   });
 });
 

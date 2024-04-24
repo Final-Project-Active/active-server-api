@@ -35,17 +35,17 @@ class Post {
   static async addComment(data) {
     const postCollection = this.collection();
     const errors = []
-    
-    if(data.comment === undefined){
+
+    if (data.comment === undefined) {
       errors.push("comment required")
     }
 
-    if(typeof data.comment === 'string' && data.comment.length === 0){
+    if (typeof data.comment === 'string' && data.comment.length === 0) {
       errors.push("comment can't be empty")
     }
-    
-    if(errors.length > 0){
-      return {error: errors}
+
+    if (errors.length > 0) {
+      return { error: errors }
     }
 
     const result = await postCollection.updateOne(
@@ -77,13 +77,8 @@ class Post {
       _id: new ObjectId(data.postId)
     });
 
-    if (result) {
-      const likes = result.likes.map((id) => {
-        return id.toString();
-      });
-      return likes.includes(data.userId.toString())
-    }
-    return false
+    const likes = result.likes.map((id) => { return id.toString(); });
+    return likes.includes(data.userId.toString())
   }
 
   static async removeLike(data) {

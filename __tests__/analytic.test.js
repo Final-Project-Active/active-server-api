@@ -46,21 +46,66 @@ describe("GET /analytics", () => {
 });
 
 describe("POST /analytics", () => {
-  test("should create a new package", async () => {
-    const new_analytics_data = {
+  describe("Success", () => {
+    test("should create a new package", async () => {
+      const new_analytics_data = {
         currentWeight: 88,
         duration: 2,
         intensity: "high",
         userId: "662669e2e2ecf792dcebb77d",
-    };
-    const response = await request(app)
-      .post("/analytics")
-      .send(new_analytics_data)
-      .set("Authorization", "Bearer " + access_token_user);
+      };
+      const response = await request(app)
+        .post("/analytics")
+        .send(new_analytics_data)
+        .set("Authorization", "Bearer " + access_token_user);
 
-    expect(response.status).toBe(201);
-    expect(response.body).toHaveProperty("currentWeight")
-    expect(response.body).toHaveProperty("duration")
-    expect(response.body).toHaveProperty("intensity")
+      expect(response.status).toBe(201);
+      expect(response.body).toHaveProperty("currentWeight")
+      expect(response.body).toHaveProperty("duration")
+      expect(response.body).toHaveProperty("intensity")
+    });
+  });
+  describe("Failed", () => {
+    test("should return 400 when currentWeight is missing", async () => {
+      const new_analytics_data = {
+        duration: 2,
+        intensity: "high",
+        userId: "662669e2e2ecf792dcebb77d",
+      };
+      const response = await request(app)
+        .post("/analytics")
+        .send(new_analytics_data)
+        .set("Authorization", "Bearer " + access_token_user);
+
+      expect(response.status).toBe(400);
+    });
+
+    test("should return 400 when duration is missing", async () => {
+      const new_analytics_data = {
+        currentWeight: 88,
+        intensity: "high",
+        userId: "662669e2e2ecf792dcebb77d",
+      };
+      const response = await request(app)
+        .post("/analytics")
+        .send(new_analytics_data)
+        .set("Authorization", "Bearer " + access_token_user);
+
+      expect(response.status).toBe(400);
+    });
+
+    test("should return 400 when intensity is missing", async () => {
+      const new_analytics_data = {
+        currentWeight: 88,
+        duration: 2,
+        userId: "662669e2e2ecf792dcebb77d",
+      };
+      const response = await request(app)
+        .post("/analytics")
+        .send(new_analytics_data)
+        .set("Authorization", "Bearer " + access_token_user);
+
+      expect(response.status).toBe(400);
+    });
   });
 });
